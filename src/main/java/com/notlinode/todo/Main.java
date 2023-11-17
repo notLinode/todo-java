@@ -1,4 +1,4 @@
-package com.notlinode;
+package com.notlinode.todo;
 
 public class Main {
 
