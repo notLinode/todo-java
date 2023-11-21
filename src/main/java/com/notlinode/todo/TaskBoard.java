@@ -18,7 +18,7 @@ public class TaskBoard {
         tasks.add(task);
     }
 
-    void remove(int idx) {
+    void remove(int idx) throws IndexOutOfBoundsException {
         tasks.remove(idx);
     }
 
@@ -33,8 +33,12 @@ public class TaskBoard {
     }
 
     void render() throws IOException, InterruptedException {
-        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        tasks.forEach(task -> System.out.printf((task.isChecked() ? "[x] %s\n" : "[ ] %s\n"), task.getDescription()));
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Clean console
+
+        int i = 0;
+        for (TodoTask task : tasks) {
+            System.out.printf((task.isChecked() ? "%d: [x] %s\n" : "%d: [ ] %s\n"), i++, task.getDescription());
+        }
     }
 
 }
